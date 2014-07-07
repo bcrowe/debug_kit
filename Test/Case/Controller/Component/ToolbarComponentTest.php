@@ -325,7 +325,9 @@ class ToolbarComponentTestCase extends CakeTestCase {
 		$this->_loadController(array(
 			'panels' => array('timer'),
 		));
-		$MockPanel = $this->getMock('DebugPanel');
+		$MockPanel = $this->getMockBuilder('DebugPanel')
+						->disableOriginalConstructor()
+						->getMock();
 		$MockPanel->expects($this->once())->method('startup');
 		$this->Controller->Toolbar->panels['timer'] = $MockPanel;
 
@@ -378,7 +380,10 @@ class ToolbarComponentTestCase extends CakeTestCase {
 		$this->_loadController(array(
 			'panels' => array('timer', 'session'),
 		));
-		$MockPanel = $this->getMock('DebugPanel');
+		$MockPanel = $this->getMockBuilder('DebugPanel')
+						->disableOriginalConstructor()
+						->getMock();
+
 		$MockPanel->expects($this->once())->method('beforeRender');
 		$this->Controller->Toolbar->panels['timer'] = $MockPanel;
 		$this->Controller->Toolbar->beforeRender($this->Controller);
@@ -419,7 +424,9 @@ class ToolbarComponentTestCase extends CakeTestCase {
 		Cache::delete('toolbar_history', $configName);
 
 		DebugTimer::start('controllerAction', 'testing beforeRedirect');
-		$MockPanel = $this->getMock('DebugPanel');
+		$MockPanel = $this->getMockBuilder('DebugPanel')
+						->disableOriginalConstructor()
+						->getMock();
 		$MockPanel->expects($this->once())->method('beforeRender');
 		$this->Controller->Toolbar->panels['session'] = $MockPanel;
 		$this->Controller->Toolbar->beforeRedirect($this->Controller, '/another/url');
