@@ -228,4 +228,13 @@ class DebugEngine extends CacheEngine {
 		return $result;
 	}
 
+/**
+ * Accessor method for the CacheEngine's configuration array
+ *
+ * @return array The configuration array for the CacheEngine
+ */
+	public function getConfig() {
+		return $this->_config;
+	}
+
 }
